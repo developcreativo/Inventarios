@@ -61,13 +61,13 @@ class EquipmentResource extends Resource
                     'multiple'                => false,
                 ])->sortable(),
 
-            BroadcasterField::make('Avg Price', 'avg_price')
+            BroadcasterField::make(__('Avg Price'), 'avg_price')
                 ->broadcastTo('items_value'),
 
-            BroadcasterField::make('Available Items', 'available_items')
+            BroadcasterField::make(__('Available Items'), 'available_items')
                 ->broadcastTo('items_value'),
 
-            ListenerField::make('Items Value', 'items_value')
+            ListenerField::make(__('Items Value'), 'items_value')
                 ->listensTo('items_value')
                 ->disableCalculationOnUpdate()
                 ->calculateWith(function (Collection $values) {
