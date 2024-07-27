@@ -164,7 +164,7 @@ class EquipmentOrderResource extends Resource
      */
     public static function authorizedToCreate(Request $request )
     {
-        return false;
+        return auth()->user()->can(__( "Create equipment" ));
     }
 
     /**
@@ -173,7 +173,7 @@ class EquipmentOrderResource extends Resource
      */
     public function authorizedToDelete(Request $request )
     {
-        return false;
+        return auth()->user()->can(__( "Delete equipment" ));
     }
 
     /**
@@ -182,7 +182,7 @@ class EquipmentOrderResource extends Resource
      */
     public function authorizedToUpdate(Request $request )
     {
-        return false;
+        return auth()->user()->can(__( "Update equipment" ));
     }
 
     /**
@@ -191,7 +191,7 @@ class EquipmentOrderResource extends Resource
      */
     public function authorizedToView(Request $request)
     {
-        return false;
+        return auth()->user()->can(__( "View equipment" ));
     }
 
 
@@ -201,7 +201,7 @@ class EquipmentOrderResource extends Resource
      */
     public static function authorizedToViewAny(Request $request)
     {
-        return false;
+        return auth()->user()->can(__( "View equipment" ));
     }
 
 }
