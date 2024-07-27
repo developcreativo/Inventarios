@@ -20,8 +20,6 @@ class ToolServiceProvider extends ServiceProvider
     public function boot() : void
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'inventarios');
-        $this->loadJsonTranslationsFrom(__DIR__.'/../resources/lang/es.json');
-
         $this->app->booted(function () {
             $this->routes();
         });

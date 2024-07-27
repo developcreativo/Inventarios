@@ -49,7 +49,7 @@ class EquipmentOrderResource extends Resource
         return [
             ID::make()->sortable(),
 
-            Date::make('Order Date')
+            Date::make(__('Order Date'), 'order_date')
                 ->sortable()
                 ->rules('required', 'date'),
 
@@ -68,15 +68,15 @@ class EquipmentOrderResource extends Resource
 //                ->sortable()
 //                ->rules('required', 'integer'),
 
-            BroadcasterField::make('Quantity', 'quantity')
+            BroadcasterField::make(__('Quantity'), 'quantity')
                 ->broadcastTo('available_items_after'),
 
-            Number::make('Order Price')
+            Number::make(__('Order Price'))
                 ->sortable()
                 ->rules('required', 'numeric'),
 
 
-            ListenerField::make('Available Items Before', 'available_items_before')
+            ListenerField::make(__('Available Items Before'), 'available_items_before')
                 ->listensTo('available_items_before')
                 ->readonly()
                 ->calculateWith(function (Collection $values) {
@@ -90,7 +90,7 @@ class EquipmentOrderResource extends Resource
 //                ->sortable()
 //                ->rules('required', 'integer'),
 
-            ListenerField::make('Available Items After', 'available_items_after')
+            ListenerField::make(__('Available Items After'), 'available_items_after')
                 ->listensTo('available_items_after')
                 ->readonly()
                 ->calculateWith(function (Collection $values) {
@@ -111,7 +111,7 @@ class EquipmentOrderResource extends Resource
 
             BelongsTo::make( __( 'Person' ), 'usuario', Persons::class )->nullable()->searchable()->sortable(),
 
-            Text::make('Comments')
+            Text::make(__('Comments'))
                 ->sortable()
                 ->rules('required'),
         ];

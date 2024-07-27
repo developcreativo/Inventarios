@@ -2,5 +2,8 @@
   "Order Date": "Fecha de pedido",
   "Order Type": "Tipo de pedido",
   "Equipment": "Equipamiento",
+  "Quantity": "Cantidad",
+  "Available Items After": "Artículos disponibles después de",
+  "Available Items Before": "Artículos disponibles antes de",
   "Order Price": "Precio del pedido"
 }
