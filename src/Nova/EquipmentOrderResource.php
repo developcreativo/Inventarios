@@ -158,4 +158,50 @@ class EquipmentOrderResource extends Resource
         $product->save();
     }
 
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public static function authorizedToCreate(Request $request )
+    {
+        return auth()->user()->can(__( "Create equipment" ));
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function authorizedToDelete(Request $request )
+    {
+        return auth()->user()->can(__( "Delete equipment" ));
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function authorizedToUpdate(Request $request )
+    {
+        return auth()->user()->can(__( "Update equipment" ));
+    }
+
+    /**
+     * @param Request $request
+     * @return true
+     */
+    public function authorizedToView(Request $request)
+    {
+        return true;
+    }
+
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public static function authorizedToViewAny(Request $request)
+    {
+        return auth()->user()->can(__( "View equipment" ));
+    }
+
 }

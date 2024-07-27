@@ -108,4 +108,50 @@ class EquipmentResource extends Resource
     {
         return [];
     }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public static function authorizedToCreate(Request $request )
+    {
+        return auth()->user()->can(__( "Create Orders" ));
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function authorizedToDelete(Request $request )
+    {
+        return auth()->user()->can(__( "Delete Orders" ));
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public function authorizedToUpdate(Request $request )
+    {
+        return auth()->user()->can(__( "Update Orders" ));
+    }
+
+    /**
+     * @param Request $request
+     * @return true
+     */
+    public function authorizedToView(Request $request)
+    {
+        return true;
+    }
+
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    public static function authorizedToViewAny(Request $request)
+    {
+        return auth()->user()->can(__( "View Orders" ));
+    }
 }
