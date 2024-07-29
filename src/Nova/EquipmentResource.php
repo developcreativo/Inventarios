@@ -43,7 +43,6 @@ class EquipmentResource extends Resource
 
 
             Text::make(__('Name'), 'name')
-                ->sortable()
                 ->rules('required'),
 
             Text::make(__('Comments'), 'comments')
@@ -68,8 +67,8 @@ class EquipmentResource extends Resource
                 ->broadcastTo('items_value'),
 
             ListenerField::make(__('Items Value'), 'items_value')
+                ->readonly()
                 ->listensTo('items_value')
-                ->disableCalculationOnUpdate()
                 ->calculateWith(function (Collection $values) {
                     $avg_price = $values->get('avg_price');
                     $available_items = $values->get('available_items');

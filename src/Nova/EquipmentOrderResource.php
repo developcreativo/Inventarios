@@ -26,10 +26,10 @@ class EquipmentOrderResource extends Resource
     use HasCallbacks;
 
     public static function label() {
-        return __("Ordernes");
+        return __("Movimientos");
     }
     public static function singularLabel() {
-        return  __("Orden");
+        return  __("Movimiento");
     }
 
     public static function group() {
