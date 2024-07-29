@@ -111,7 +111,7 @@ class EquipmentOrderResource extends Resource
 
             BelongsTo::make( __( 'Person' ), 'usuario', Persons::class )->nullable()->searchable()->sortable(),
 
-            Text::make(__('Comments'))
+            Text::make(__('Comments'), 'comments')
                 ->sortable()
                 ->rules('required'),
         ];
