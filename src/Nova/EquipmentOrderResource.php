@@ -71,7 +71,7 @@ class EquipmentOrderResource extends Resource
             BroadcasterField::make(__('Quantity'), 'quantity')
                 ->broadcastTo('available_items_after'),
 
-            Number::make(__('Order Price'))
+            Number::make(__('Order Price'), 'order_price')
                 ->sortable()
                 ->rules('required', 'numeric'),
 
