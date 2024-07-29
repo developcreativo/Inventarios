@@ -5,6 +5,8 @@ namespace Developcreativo\Inventarios\Nova;
 use App\Nova\Resource;
 use Developcreativo\Inventarios\BroadcasterField;
 use Developcreativo\Inventarios\ListenerField;
+use Developcreativo\Inventarios\ListenerHiddenField;
+use Developcreativo\Inventarios\ListenerHiddenField;
 use Developcreativo\Inventarios\Models\Equipment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
