@@ -18,7 +18,7 @@ use Laravel\Nova\Fields\Text;
 class EquipmentResource extends Resource
 {
     use HasCallbacks;
-    
+
     public static function label() {
         return __("Equipos");
     }
@@ -69,14 +69,8 @@ class EquipmentResource extends Resource
             BroadcasterField::make(__('Available Items'), 'available_items')
                 ->broadcastTo('items_value'),
 
-            ListenerHiddenField::make(__('Items Value'), 'items_value')
-                ->listensTo('items_value')
-                ->calculateWith(function (Collection $values) {
-                    $avg_price = $values->get('avg_price');
-                    $available_items = $values->get('available_items');
-                    return $avg_price * $available_items;
-                }),
-
+            Number::make(__('Items Value'), 'items_value')
+                ->exceptOnForms(),
 //            Number::make(__('Last Order Id'), 'last_order_id')
 //                ->sortable()
 //                ->rules('required', 'integer'),
