@@ -66,7 +66,7 @@ class EquipmentResource extends Resource
             BroadcasterField::make(__('Available Items'), 'available_items')
                 ->broadcastTo('items_value'),
 
-            ListenerField::make(__('Items Value'), 'items_value')
+            ListenerHiddenField::make(__('Items Value'), 'items_value')
                 ->readonly()
                 ->listensTo('items_value')
                 ->calculateWith(function (Collection $values) {

@@ -2,7 +2,7 @@
 
 namespace Developcreativo\Inventarios;
 
-use Gldrenthe89\NovaCalculatedField\Traits\CanDisableCalculationOnUpdateTrait;
+use Developcreativo\Inventarios\Traits\CanDisableCalculationOnUpdateTrait;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
