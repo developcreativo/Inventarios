@@ -29,7 +29,7 @@ class EquipmentOrderResource extends Resource
         return __("Movimientos");
     }
     public static function singularLabel() {
-        return  __("Movimiento");
+        return  __("Movimientos");
     }
 
     public static function group() {
