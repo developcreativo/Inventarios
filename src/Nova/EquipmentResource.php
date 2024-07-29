@@ -4,10 +4,9 @@ namespace Developcreativo\Inventarios\Nova;
 
 use App\Nova\Resource;
 use Developcreativo\Inventarios\BroadcasterField;
-use Developcreativo\Inventarios\ListenerField;
-use Developcreativo\Inventarios\ListenerHiddenField;
 use Developcreativo\Inventarios\ListenerHiddenField;
 use Developcreativo\Inventarios\Models\Equipment;
+use Developcreativo\Inventarios\Traits\HasCallbacks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use KossShtukert\LaravelNovaSelect2\Select2;
@@ -18,6 +17,8 @@ use Laravel\Nova\Fields\Text;
 
 class EquipmentResource extends Resource
 {
+    use HasCallbacks;
+    
     public static function label() {
         return __("Equipos");
     }
@@ -69,13 +70,12 @@ class EquipmentResource extends Resource
                 ->broadcastTo('items_value'),
 
             ListenerHiddenField::make(__('Items Value'), 'items_value')
-                ->readonly()
                 ->listensTo('items_value')
                 ->calculateWith(function (Collection $values) {
                     $avg_price = $values->get('avg_price');
                     $available_items = $values->get('available_items');
                     return $avg_price * $available_items;
-                })->showCalculationButton(false),
+                }),
 
 //            Number::make(__('Last Order Id'), 'last_order_id')
 //                ->sortable()
@@ -88,6 +88,20 @@ class EquipmentResource extends Resource
             Boolean::make(__('Reorder Flag'), 'reorder_flag')
                 ->sortable(),
         ];
+    }
+
+    public static function beforeSave(Request $request, $model)
+    {
+        $avg_price = $request->get('avg_price');
+        $available_items = $request->get('available_items');
+        $model->items_value = $avg_price * $available_items;
+    }
+
+    public static function afterSave(Request $request, $model)
+    {
+        $avg_price = $request->get('avg_price');
+        $available_items = $request->get('available_items');
+        $model->items_value = $avg_price * $available_items;
     }
 
     public function cards(Request $request): array
