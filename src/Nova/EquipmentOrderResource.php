@@ -10,6 +10,7 @@ use Developcreativo\Inventarios\BroadcasterSelectField;
 use Developcreativo\Inventarios\ListenerField;
 use Developcreativo\Inventarios\Models\Equipment;
 use Developcreativo\Inventarios\Models\EquipmentOrder;
+use Developcreativo\Inventarios\Nova\Actions\ActionEquipmentOrder;
 use Developcreativo\Inventarios\Traits\HasCallbacks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -134,7 +135,11 @@ class EquipmentOrderResource extends Resource
 
     public function actions(Request $request): array
     {
-        return [];
+        return [
+            ( new ActionEquipmentOrder())->canSee( function ( $request){
+                return true;
+            } )
+        ];
     }
 
 
