@@ -98,7 +98,7 @@ class ActionEquipment  extends DetachedAction
     {
         return [
             Select2::make(__('Equipment Type'), 'equipment_type')
-                ->options(\App\Claves::query()->where( 'clave', 'equipment_type' )->pluck( 'descrip_larga', 'valor' ))
+                ->options(\App\Claves::query()->where( 'clave', 'tipo_equipo' )->pluck( 'descrip_larga', 'valor' ))
                 ->configuration([
                     'placeholder'             => __('Choose an option'),
                     'allowClear'              => true,
