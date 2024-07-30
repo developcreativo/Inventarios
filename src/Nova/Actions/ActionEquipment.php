@@ -32,7 +32,7 @@ class ActionEquipment  extends DetachedAction
 //            return DetachedAction::danger(__('The fields are required'));
 //        }
 
-        $trans = __('Movimientos');
+        $trans = __('Equipos');
         $now              = now()->format('U');
         $fileName         = "tmp/$trans-$now.csv";
         $storageInstance  = Storage::disk('reportes');
