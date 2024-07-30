@@ -72,9 +72,10 @@ class ActionEquipmentOrder  extends DetachedAction
 
 
         $records = collect($records)->map(function ($x) {
+            $order_type = \App\Claves::query()->where( 'clave', 'order_type' )->where('valor', $x->order_type)->first();
             return (array)[
                 $x->order_date,
-                $x->order_type,
+                $order_type->descrip_larga,
                 isset( $x->equipment) ? $x->equipment['name'] : '',
                 $x->quantity,
                 $x->order_price,
