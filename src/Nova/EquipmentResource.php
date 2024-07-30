@@ -6,6 +6,7 @@ use App\Nova\Resource;
 use Developcreativo\Inventarios\BroadcasterField;
 use Developcreativo\Inventarios\ListenerHiddenField;
 use Developcreativo\Inventarios\Models\Equipment;
+use Developcreativo\Inventarios\Nova\Actions\ActionEquipment;
 use Developcreativo\Inventarios\Traits\HasCallbacks;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -115,7 +116,11 @@ class EquipmentResource extends Resource
 
     public function actions(Request $request): array
     {
-        return [];
+        return [
+            ( new ActionEquipment())->canSee( function ( $request){
+                return true;
+            } )
+        ];
     }
 
     /**

@@ -5,32 +5,29 @@ namespace Developcreativo\Inventarios\Nova\Actions;
 use App\Traits\AccessScopeTraits;
 use Brightspot\Nova\Tools\DetachedActions\DetachedAction;
 use Carbon\Carbon;
-use Developcreativo\Inventarios\Models\EquipmentOrder;
+use Developcreativo\Inventarios\Models\Equipment;
 use Illuminate\Support\Facades\Storage;
 use KossShtukert\LaravelNovaSelect2\Select2;
 use Laravel\Nova\Fields\ActionFields;
 use Laravel\Nova\Fields\Date;
 use League\Csv\Writer;
 
-class ActionEquipmentOrder  extends DetachedAction
+class ActionEquipment  extends DetachedAction
 {
     use AccessScopeTraits;
     public function label()
     {
-        return __('Exportar movimiento');
+        return __('Exportar equipos');
     }
 
     public function name()
     {
-        return __('Exportar movimiento');
+        return __('Exportar equipos');
     }
 
     public function handle(ActionFields $fields)
     {
-        $order_type     = $fields->order_type;
-        $from    = $fields->from;
-        $to     = $fields->to;
-
+        $equipment_type     = $fields->equipment_type;
 //        if ($from == null || $to == null) {
 //            return DetachedAction::danger(__('The fields are required'));
 //        }
@@ -42,28 +39,24 @@ class ActionEquipmentOrder  extends DetachedAction
         $putFileOnStorage = $storageInstance->put($fileName, '');
         $fileContent      = $storageInstance->get($fileName);
 
-        $query = EquipmentOrder::query();
+        $query = Equipment::query();
 
-        if ($order_type) {
-            $query = $query->where('order_type', $order_type);
+        if ($equipment_type) {
+            $query = $query->where('equipment_type', $equipment_type);
         }
 
-
-        if ($from !== null && $to !== null) {
-            $query = $query->whereBetween('order_date', [$from, $to]);
-        }
 
         $headers = [
             0 => [
-                __('Order Date'),
-                __('Order Type'),
-                __('Equipment'),
-                __('Quantity'),
-                __('Order Price'),
-                __('Available Items Before'),
-                __('Available Items After'),
-                __('Person'),
+                __('ID'),
+                __('Name'),
                 __('Comments'),
+                __('Equipment Type'),
+                __('Avg Price'),
+                __('Available Items'),
+                __('Items Value'),
+                __('Reorder Point'),
+                __('Reorder Flag'),
             ]
         ];
 
@@ -72,17 +65,18 @@ class ActionEquipmentOrder  extends DetachedAction
 
 
         $records = collect($records)->map(function ($x) {
-            $order_type = \App\Claves::query()->where( 'clave', 'tipo_movimiento' )->where('valor', $x->order_type)->first();
+            $equipment_type = \App\Claves::query()->where( 'clave', 'equipment_type' )->where('valor', $x->equipment_type)->first();
             return (array)[
-                $x->order_date,
-                isset($order_type) ? $order_type['descrip_larga'] : '',
-                isset( $x->equipment) ? $x->equipment['name'] : '',
-                $x->quantity,
-                $x->order_price,
-                $x->available_items_before,
-                $x->available_items_after,
-                isset( $x->usuario) ? $x->usuario['nombre'] : '',
+                $x->id,
+                $x->name,
                 $x->comments,
+                isset($equipment_type) ? $equipment_type['descrip_larga'] : '',
+                round($x->avg_price, 2),
+                $x->available_items,
+                $x->items_value,
+                $x->last_order_id,
+                $x->reorder_point,
+                $x->reorder_flag,
             ];
         })->toArray();
 
@@ -103,10 +97,8 @@ class ActionEquipmentOrder  extends DetachedAction
     public function fields()
     {
         return [
-            Date::make(__('From'), 'from'),
-            Date::make(__('To'), 'to'),
-            Select2::make(__('Order Type'), 'order_type')
-                ->options(\App\Claves::query()->where( 'clave', 'order_type' )->pluck( 'descrip_larga', 'valor' ))
+            Select2::make(__('Equipment Type'), 'equipment_type')
+                ->options(\App\Claves::query()->where( 'clave', 'equipment_type' )->pluck( 'descrip_larga', 'valor' ))
                 ->configuration([
                     'placeholder'             => __('Choose an option'),
                     'allowClear'              => true,
