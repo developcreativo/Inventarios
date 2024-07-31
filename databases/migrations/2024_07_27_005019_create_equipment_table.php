@@ -19,6 +19,7 @@ class CreateEquipmentTable extends Migration
             $table->integer('last_order_id');
             $table->integer('reorder_point');
             $table->boolean('reorder_flag');
+            $table->unsignedBigInteger('equipment_talla')->nullable()->default(null);
             $table->timestamps();
         });
     }
