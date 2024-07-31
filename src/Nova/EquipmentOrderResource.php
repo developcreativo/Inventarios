@@ -79,7 +79,7 @@ class EquipmentOrderResource extends Resource
 
             Number::make(__('Order Price'), 'order_price')
                 ->sortable()
-                ->rules('required', 'numeric'),
+                ->rules('nullable', 'numeric'),
 
 
             ListenerField::make(__('Available Items Before'), 'available_items_before')
