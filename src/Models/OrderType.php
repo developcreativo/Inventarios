@@ -15,6 +15,8 @@ class OrderType extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = "valor";
+
     protected $fillable = [
         'valor',
         'descrip_corta',

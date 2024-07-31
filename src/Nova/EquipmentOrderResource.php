@@ -59,9 +59,10 @@ class EquipmentOrderResource extends Resource
 //                ->rules('required')
 //                ->broadcastTo('available_items_after')->sortable(),
 
-            BroadcasterBelongsToField::make(__('Order Type'), 'type_order', \Developcreativo\Inventarios\Nova\OrderTypeResource::class)
+            BroadcasterBelongsToField::make(__('Order Type'), 'order', \Developcreativo\Inventarios\Nova\OrderTypeResource::class)
                 ->rules('required')
-                ->broadcastTo('available_items_after')->sortable(),
+                ->broadcastTo('available_items_after')
+                ->sortable(),
 
             BroadcasterBelongsToField::make(__('Equipment'), 'equipment', \Developcreativo\Inventarios\Nova\EquipmentResource::class)
                 ->broadcastTo(['available_items_after', 'available_items_before']),
@@ -101,7 +102,7 @@ class EquipmentOrderResource extends Resource
                 ->calculateWith(function (Collection $values) {
                     $value = $values->get('equipment');
                     $quantity = $values->get('quantity');
-                    $order_type = $values->get('order_type');
+                    $order_type = $values->get('order');
                     $product = Equipment::query()->find($value);
                     $available_items = !empty($product) ? $product->available_items :  0;
                     if ($order_type == 1) {

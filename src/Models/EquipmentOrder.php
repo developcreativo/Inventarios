@@ -36,8 +36,8 @@ class EquipmentOrder extends Model
         return $this->belongsTo(Person::class, 'id_usuario');
     }
 
-    public function type_order(): BelongsTo
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(OrderType::class);
+        return $this->belongsTo(OrderType::class, 'order_type', 'valor');
     }
 }
