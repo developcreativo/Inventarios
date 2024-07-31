@@ -14,7 +14,7 @@ class CreateEquipmentOrdersTable extends Migration
             $table->integer('order_type');
             $table->integer('id_equipment');
             $table->integer('quantity');
-            $table->double('order_price');
+            $table->double('order_price')->nullable()->default(0);
             $table->integer('available_items_before');
             $table->integer('available_items_after');
             $table->integer('user_id');

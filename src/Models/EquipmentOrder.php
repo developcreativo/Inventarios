@@ -20,6 +20,7 @@ class EquipmentOrder extends Model
         'user_id',
         'id_usuario',
         'comments',
+        'equipo_talla_id',
     ];
 
     protected $casts = [
@@ -39,5 +40,10 @@ class EquipmentOrder extends Model
     public function order(): BelongsTo
     {
         return $this->belongsTo(OrderType::class, 'order_type', 'valor');
+    }
+
+    public function equipo_talla(): BelongsTo
+    {
+        return $this->belongsTo(Claves::query()->where( 'clave', 'equipo_talla' ), 'equipo_talla_id', 'valor');
     }
 }

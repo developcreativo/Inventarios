@@ -66,6 +66,16 @@ class EquipmentOrderResource extends Resource
 
             BroadcasterBelongsToField::make(__('Equipment'), 'equipment', \Developcreativo\Inventarios\Nova\EquipmentResource::class)
                 ->broadcastTo(['available_items_after', 'available_items_before']),
+
+            Select2::make(__('Talla'), 'equipo_talla_id')
+                ->options(\App\Claves::query()->where( 'clave', 'equipo_talla' )->pluck( 'descrip_larga', 'valor' ))
+                ->rules('required')
+                ->configuration([
+                    'placeholder'             => __('Choose an option'),
+                    'allowClear'              => true,
+                    'minimumResultsForSearch' => 1,
+                    'multiple'                => false,
+                ])->sortable(),
 //            BroadcasterSelectField::make(__('Equipment'), 'equipment', \Developcreativo\Inventarios\Nova\EquipmentResource::class)
 //                ->sortable()
 //                ->rules('required'),
