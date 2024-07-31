@@ -59,7 +59,7 @@ class EquipmentOrderResource extends Resource
 //                ->rules('required')
 //                ->broadcastTo('available_items_after')->sortable(),
 
-            BroadcasterBelongsToField::make(__('Order Type'), 'order_type', \Developcreativo\Inventarios\Nova\OrderTypeResource::class)
+            BroadcasterBelongsToField::make(__('Order Type'), 'type_order', \Developcreativo\Inventarios\Nova\OrderTypeResource::class)
                 ->rules('required')
                 ->broadcastTo('available_items_after')->sortable(),
 
