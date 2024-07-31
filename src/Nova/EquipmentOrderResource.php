@@ -54,8 +54,12 @@ class EquipmentOrderResource extends Resource
                 ->sortable()
                 ->rules('required', 'date'),
 
-            BroadcasterSelectField::make(__('Order Type'), 'order_type')
-                ->options(\App\Claves::query()->where( 'clave', 'tipo_movimiento' )->pluck( 'descrip_larga', 'valor' ))
+//            BroadcasterSelectField::make(__('Order Type'), 'order_type')
+//                ->options(\App\Claves::query()->where( 'clave', 'tipo_movimiento' )->pluck( 'descrip_larga', 'valor' ))
+//                ->rules('required')
+//                ->broadcastTo('available_items_after')->sortable(),
+
+            BroadcasterBelongsToField::make(__('Order Type'), 'order_type', \Developcreativo\Inventarios\Nova\OrderTypeResource::class)
                 ->rules('required')
                 ->broadcastTo('available_items_after')->sortable(),
 

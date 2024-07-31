@@ -2,8 +2,10 @@
 
 namespace Developcreativo\Inventarios\Models;
 
+use App\Claves;
 use App\Person;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EquipmentOrder extends Model
 {
@@ -32,5 +34,10 @@ class EquipmentOrder extends Model
     public function usuario()
     {
         return $this->belongsTo(Person::class, 'id_usuario');
+    }
+
+    public function type_order(): BelongsTo
+    {
+        return $this->belongsTo(OrderType::class);
     }
 }

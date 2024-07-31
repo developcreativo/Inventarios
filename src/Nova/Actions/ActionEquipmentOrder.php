@@ -105,7 +105,7 @@ class ActionEquipmentOrder  extends DetachedAction
         return [
             Date::make(__('From'), 'from'),
             Date::make(__('To'), 'to'),
-            Select2::make(__('Order Type'), 'order_type')
+            Select2::make(__('Order Type'), 'tipo_movimiento')
                 ->options(\App\Claves::query()->where( 'clave', 'order_type' )->pluck( 'descrip_larga', 'valor' ))
                 ->configuration([
                     'placeholder'             => __('Choose an option'),
