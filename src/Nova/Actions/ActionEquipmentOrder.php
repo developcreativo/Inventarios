@@ -58,6 +58,7 @@ class ActionEquipmentOrder  extends DetachedAction
                 __('Order Date'),
                 __('Order Type'),
                 __('Equipment'),
+                __('Talla'),
                 __('Quantity'),
                 __('Order Price'),
                 __('Available Items Before'),
@@ -73,10 +74,12 @@ class ActionEquipmentOrder  extends DetachedAction
 
         $records = collect($records)->map(function ($x) {
             $order_type = \App\Claves::query()->where( 'clave', 'tipo_movimiento' )->where('valor', $x->order_type)->first();
+            $talla = \App\Claves::query()->where( 'clave', 'equipo_talla' )->where('valor', $x->equipo_talla_id)->first();
             return (array)[
                 $x->order_date,
                 isset($order_type) ? $order_type['descrip_larga'] : '',
                 isset( $x->equipment) ? $x->equipment['name'] : '',
+                isset($talla) ? $talla['descrip_larga'] : '',
                 $x->quantity,
                 $x->order_price,
                 $x->available_items_before,

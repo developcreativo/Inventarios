@@ -161,6 +161,7 @@ class EquipmentOrderResource extends Resource
     {
         $available_items_before = $request->get('available_items_before');
         $available_items_after = $request->get('available_items_after');
+
         $model->user_id = Auth::id();
         $model->available_items_before = $available_items_before;
         $model->available_items_after = $available_items_after;
@@ -171,9 +172,14 @@ class EquipmentOrderResource extends Resource
     {
         $equipment = $request->get('equipment');
         $available_items_after = $request->get('available_items_after');
+        $quantity = $request->get('quantity');
         $product = Equipment::query()->find($equipment);
         $product->last_order_id = $model->id;
         $product->available_items = $available_items_after;
+
+        if ($quantity < $product->reorder_point) {
+            $product->reorder_flag = True;
+        }
         $product->save();
     }
 
