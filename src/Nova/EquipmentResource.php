@@ -74,7 +74,8 @@ class EquipmentResource extends Resource
                 ])->nullable()->sortable(),
 
             BroadcasterField::make(__('Avg Price'), 'avg_price')
-                ->broadcastTo('items_value'),
+                ->broadcastTo('items_value')
+                ->rules('required'),
 
             BroadcasterField::make(__('Available Items'), 'available_items')
                 ->broadcastTo('items_value'),
