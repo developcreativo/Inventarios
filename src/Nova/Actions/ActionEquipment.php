@@ -52,6 +52,7 @@ class ActionEquipment  extends DetachedAction
                 __('Name'),
                 __('Comments'),
                 __('Equipment Type'),
+                __('Talla'),
                 __('Avg Price'),
                 __('Available Items'),
                 __('Items Value'),
@@ -66,11 +67,13 @@ class ActionEquipment  extends DetachedAction
 
         $records = collect($records)->map(function ($x) {
             $equipment_type = \App\Claves::query()->where( 'clave', 'equipment_type' )->where('valor', $x->equipment_type)->first();
+            $talla = \App\Claves::query()->where( 'clave', 'equipo_talla' )->where('valor', $x->id_talla)->first();
             return (array)[
                 $x->id,
                 $x->name,
                 $x->comments,
                 isset($equipment_type) ? $equipment_type['descrip_larga'] : '',
+                isset($talla) ? $talla['descrip_larga'] : '',
                 round($x->avg_price, 2),
                 $x->available_items,
                 $x->items_value,
