@@ -64,6 +64,15 @@ class EquipmentResource extends Resource
                     'multiple'                => false,
                 ])->sortable(),
 
+            Select2::make(__('Talla'), 'id_talla')
+                ->options(\App\Claves::query()->where( 'clave', 'equipo_talla' )->pluck( 'descrip_larga', 'valor' ))
+                ->configuration([
+                    'placeholder'             => __('Choose an option'),
+                    'allowClear'              => true,
+                    'minimumResultsForSearch' => 1,
+                    'multiple'                => false,
+                ])->nullable()->sortable(),
+
             BroadcasterField::make(__('Avg Price'), 'avg_price')
                 ->broadcastTo('items_value'),
 
