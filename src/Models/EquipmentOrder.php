@@ -21,6 +21,7 @@ class EquipmentOrder extends Model
         'id_usuario',
         'comments',
         'equipo_talla_id',
+        'valid_until'
     ];
 
     protected $casts = [

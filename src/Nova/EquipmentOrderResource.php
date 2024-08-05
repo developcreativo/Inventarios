@@ -54,10 +54,6 @@ class EquipmentOrderResource extends Resource
                 ->sortable()
                 ->rules('required', 'date'),
 
-//            BroadcasterSelectField::make(__('Order Type'), 'order_type')
-//                ->options(\App\Claves::query()->where( 'clave', 'tipo_movimiento' )->pluck( 'descrip_larga', 'valor' ))
-//                ->rules('required')
-//                ->broadcastTo('available_items_after')->sortable(),
 
             BroadcasterBelongsToField::make(__('Order Type'), 'order', \Developcreativo\Inventarios\Nova\OrderTypeResource::class)
                 ->rules('required')
@@ -75,13 +71,6 @@ class EquipmentOrderResource extends Resource
                     'minimumResultsForSearch' => 1,
                     'multiple'                => false,
                 ])->nullable()->sortable(),
-//            BroadcasterSelectField::make(__('Equipment'), 'equipment', \Developcreativo\Inventarios\Nova\EquipmentResource::class)
-//                ->sortable()
-//                ->rules('required'),
-
-//            Number::make('Quantity')
-//                ->sortable()
-//                ->rules('required', 'integer'),
 
             BroadcasterField::make(__('Quantity'), 'quantity')
                 ->broadcastTo('available_items_after'),
@@ -89,6 +78,11 @@ class EquipmentOrderResource extends Resource
             Number::make(__('Order Price'), 'order_price')
                 ->sortable()
                 ->rules('nullable', 'numeric'),
+
+
+            Date::make(__('Fecha de Vencimiento'), 'valid_until')
+                ->sortable()
+                ->rules('required', 'date'),
 
 
             ListenerField::make(__('Available Items Before'), 'available_items_before')
@@ -101,9 +95,6 @@ class EquipmentOrderResource extends Resource
                     return $available_items;
                 })->showCalculationButton(false),
 
-//            Number::make('Available Items After')
-//                ->sortable()
-//                ->rules('required', 'integer'),
 
             ListenerField::make(__('Available Items After'), 'available_items_after')
                 ->listensTo('available_items_after')
