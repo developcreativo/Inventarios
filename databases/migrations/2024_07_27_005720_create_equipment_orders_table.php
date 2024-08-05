@@ -20,6 +20,7 @@ class CreateEquipmentOrdersTable extends Migration
             $table->integer('user_id');
             $table->string('id_usuario')->nullable()->default(null);
             $table->text('comments');
+            $table->unsignedBigInteger('talla_id')->nullable()->default(null);
             $table->timestamps();
         });
     }
