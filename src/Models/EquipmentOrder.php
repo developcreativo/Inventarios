@@ -4,6 +4,7 @@ namespace Developcreativo\Inventarios\Models;
 
 use App\Claves;
 use App\Person;
+use App\Ve360v1\Models\Usuario;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -26,6 +27,7 @@ class EquipmentOrder extends Model
 
     protected $casts = [
         'order_date' => 'datetime',
+        'valid_until' => 'datetime',
     ];
 
     public function equipment()
@@ -35,7 +37,7 @@ class EquipmentOrder extends Model
 
     public function usuario()
     {
-        return $this->belongsTo(Person::class, 'id_usuario');
+        return $this->belongsTo(Usuario::class, 'id_usuario', 'id_usuario');
     }
 
     public function order(): BelongsTo

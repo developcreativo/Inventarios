@@ -2,6 +2,7 @@
 
 namespace Developcreativo\Inventarios;
 
+use Developcreativo\Inventarios\Nova\EquipmentOrderExpiryResource;
 use Developcreativo\Inventarios\Nova\EquipmentOrderResource;
 use Developcreativo\Inventarios\Nova\EquipmentResource;
 use Laravel\Nova\Nova;
@@ -11,6 +12,8 @@ class Inventarios extends Tool
 {
     public $equipmentOrderResource = EquipmentOrderResource::class;
     protected $equipmentResource = EquipmentResource::class;
+
+    protected $equipmentOrderExpiryResource = EquipmentOrderExpiryResource::class;
     /**
      * Perform any tasks that need to happen when the tool is booted.
      *
@@ -21,6 +24,7 @@ class Inventarios extends Tool
         Nova::resources([
             $this->equipmentOrderResource,
             $this->equipmentResource,
+            $this->equipmentOrderExpiryResource,
         ]);
         Nova::script('inventarios', __DIR__.'/../dist/js/tool.js');
         Nova::style('inventarios', __DIR__.'/../dist/css/tool.css');

@@ -18,4 +18,9 @@ class Equipment extends Model
         'reorder_flag',
         'talla_id',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(EquipmentOrder::class, 'id_equipment');
+    }
 }
