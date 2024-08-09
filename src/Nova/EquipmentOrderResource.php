@@ -93,8 +93,7 @@ class EquipmentOrderResource extends Resource
 
 
             Date::make(__('Fecha de Vencimiento'), 'valid_until')
-                ->sortable()
-                ->rules('required', 'date'),
+                ->sortable(),
 
 
             ListenerField::make(__('Available Items Before'), 'available_items_before')
