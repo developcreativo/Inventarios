@@ -163,7 +163,7 @@ class EquipmentOrderResource extends Resource
     {
         $equipment = $request->get('equipment');
         $talla_id = $request->get('equipo_talla_id');
-        $product = Equipment::query()->where('talla_id',$talla_id )->where('id', $equipment)->first();
+        $product = Equipment::query()->where('id_talla',$talla_id )->where('id', $equipment)->first();
         if (empty($product)) {
             $validator->errors()->add('talla_id', __('La talla no existe en dicho equipo'));
             return;

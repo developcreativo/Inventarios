@@ -16,7 +16,7 @@ class Equipment extends Model
         'last_order_id',
         'reorder_point',
         'reorder_flag',
-        'talla_id',
+        'id_talla',
     ];
 
     public function orders()
