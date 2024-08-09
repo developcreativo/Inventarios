@@ -21,6 +21,7 @@ use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Http\Requests\NovaRequest;
 
 class EquipmentOrderResource extends Resource
 {
@@ -156,6 +157,17 @@ class EquipmentOrderResource extends Resource
                 return true;
             } )
         ];
+    }
+
+    protected static function afterCreationValidation(NovaRequest $request, $validator)
+    {
+        $equipment = $request->get('equipment');
+        $talla_id = $request->get('equipo_talla_id');
+        $product = Equipment::query()->where('talla_id',$talla_id )->where('id', $equipment)->first();
+        if (empty($product)) {
+            $validator->errors()->add('talla_id', __('La talla no existe en dicho equipo'));
+            return;
+        }
     }
 
 
