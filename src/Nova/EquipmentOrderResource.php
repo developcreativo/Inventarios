@@ -58,7 +58,18 @@ class EquipmentOrderResource extends Resource
             BroadcasterBelongsToField::make(__('Order Type'), 'order', \Developcreativo\Inventarios\Nova\OrderTypeResource::class)
                 ->rules('required')
                 ->broadcastTo('available_items_after')
+                ->onlyOnForms()
                 ->sortable(),
+
+
+            Select2::make(__('Order Type'), 'order_type')
+                ->options(\App\Claves::query()->where( 'clave', 'tipo_movimiento' )->pluck( 'descrip_larga', 'valor' ))
+                ->configuration([
+                    'placeholder'             => __('Choose an option'),
+                    'allowClear'              => true,
+                    'minimumResultsForSearch' => 1,
+                    'multiple'                => false,
+                ])->exceptOnForms()->sortable(),
 
             BroadcasterBelongsToField::make(__('Equipment'), 'equipment', \Developcreativo\Inventarios\Nova\EquipmentResource::class)
                 ->broadcastTo(['available_items_after', 'available_items_before']),
